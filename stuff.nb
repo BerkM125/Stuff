@@ -1,0 +1,65 @@
+Manipulate[Graphics3D[{Blue,co =Cone[{{xBottom,yBottom,0}, {xTop, yTop, z}}, r]}, Axes->True],
+{r,1, 5},  {z, 1, 5}, {xTop, 0, 5}, {yTop, 0, 5}, {xBottom, 0, 5}, {yBottom, 0, 5}]
+vco := Dynamic[N[Volume[co]]]
+StringForm["Volume of cone: ``", vco]
+Manipulate[Graphics3D[{Orange,EdgeForm[Blue],p = Pyramid[{{0,0,0},{3,0,0},{3,3,0},{0,3,0},{xTop,yTop,zTop}}]}, Axes->True],
+{xTop, 0, 3}, {yTop, 0, 3}, {zTop, 0, 3}]
+vp := Dynamic[N[Volume[p]]]
+StringForm["Volume of Pyramid: ``", vp]
+Manipulate[Graphics3D[{Green, Translate[Rotate[s = Sphere[],rotate, {Rx,Ry, Rz}],{Tx, Ty, Tz}]}, Axes->True],
+{rotate, 0, 360}, {Rx, 1, 100}, {Ry, 1, 100}, {Rz, 1, 100}, {Tx,0, 100},{Ty,0, 100}, {Tz, 0, 100}]
+vs := Dynamic[N[Volume[s]]]
+StringForm["Volume of Sphere: ``", vs]
+Manipulate[Graphics3D[{Orange,EdgeForm[Red],Rotate[Translate[c =Cube[],{Tx, Ty, Tz}],rotate,{Rx, Ry, Rz}]}, Axes->True],
+{rotate, 0, 360}, {Rx, 1, 100}, {Ry, 1,100}, {Rz, 1, 100}, {Tx,0, 100},{Ty,0, 100}, {Tz, 0, 100}]
+vc := Dynamic[N[Volume[c]]]
+StringForm["Volume of cube: ``", vc]
+Manipulate[Plot[qp =Plus[Times[ar=a,x^2], Times[br=b,x]], {x, -50, 50}, PlotRange->{{qx1,qx2}, {qy1, qy2}}], {a, -100, 100}, {b, -100, 100}, {qx1, -100, 100}, {qx2, -100, 100}, {qy1, -100, 100}, {qy2, -100, 100}]
+av := Dynamic[ar]
+StringForm["(a) parameter in quadratic equation: ``", av]
+bv := Dynamic[br]w
+StringForm["(b) parameter in quadratic equation: ``", bv]
+quadratic := Dynamic[NSolve[qp]]
+quadratic
+Manipulate[Plot[ln =Plus[Times[mr=m, x], br=b], {x, -1000, 1000}, PlotRange->{{lx1, lx2}, {ly1, ly2}}], {m, -10, 10}, {b, -10, 10}, {lx1, -1000, 1000}, {lx2, -1000, 1000}, {ly1, -1000, 1000}, {ly2, -1000, 1000}]
+mv := Dynamic[mr]
+bv := Dynamic[br]
+StringForm["Slope of line: ``", mv]
+StringForm["Y-Intercept of line ``", bv]
+ciImage = CurrentImage[]
+image = "placeholder"
+HighlightImage[exampleText = Image[image], TextRecognize[exampleText, "Line", "BoundingBox"]] (*You can change image with ciImage for different image feeds*)
+StringForm["Text from image: ``",rText =ToString[TextRecognize[exampleText]]]
+StringForm["Language: ``", lText = LanguageIdentify[rText]]
+foreign = If[lText != LanguageIdentify["English"], 0, 1] 
+StringForm["Translation of ``: ``", rText, tText = TextTranslation[StringForm["``",rText],$Language]] 
+StringForm["Definition of ``: ``", rText, dText = WordDefinition[rText]]
+
+(*You can replace imgExpr[[1]] with ci or Image[ci] for access to the webcam*)
+fdImg =FunctionDomain[expr,x]
+frImg = FunctionRange[expr, x, y]
+If[fdImg == True, "All Real Numbers", 0]
+If[frImg == True, "All Real Numbers", 0]
+tfAboveZero := If[fdImg == ToExpression["x < 0 || x = 0"], "Domain(x) can be any number from 0 to infinity"]
+Manipulate[Plot[expr,{x, -30, 30}, PlotRange->{{xR, xR2}, {yR, yR2}}], 
+{xR, -30, 30}, {yR, -30, 30}, {xR2, -30, 30}, {yR2, -30, 30}]
+StringForm["f(x): ``", n]
+(*fd =FunctionDomain[expr2=Input["Enter Function:","ex. 1/(7-x)"],x]
+fr = FunctionRange[expr2, x, y]*)
+StringForm["Domain: `` \nRange: ``", fdImg, frImg]
+CloudDeploy[StringForm["Domain: ``",fdImg]]
+CloudDeploy[StringForm["Range: ``", frImg]]
+(*You can replace imgExpr[[1]] with ci or Image[ci] for access to the webcam*)
+fdImg =FunctionDomain[expr,x]
+frImg = FunctionRange[expr, x, y]
+If[fdImg == True, "All Real Numbers", 0]
+If[frImg == True, "All Real Numbers", 0]
+tfAboveZero := If[fdImg == ToExpression["x < 0 || x = 0"], "Domain(x) can be any number from 0 to infinity"]
+Manipulate[Plot[expr,{x, -30, 30}, PlotRange->{{xR, xR2}, {yR, yR2}}], 
+{xR, -30, 30}, {yR, -30, 30}, {xR2, -30, 30}, {yR2, -30, 30}]
+StringForm["f(x): ``", n]
+(*fd =FunctionDomain[expr2=Input["Enter Function:","ex. 1/(7-x)"],x]
+fr = FunctionRange[expr2, x, y]*)
+StringForm["Domain: `` \nRange: ``", fdImg, frImg]
+CloudDeploy[StringForm["Domain: ``",fdImg]]
+CloudDeploy[StringForm["Range: ``", frImg]]
